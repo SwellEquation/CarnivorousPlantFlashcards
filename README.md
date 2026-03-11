@@ -35,7 +35,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='https://i.imgur.com/Mr2Zwhy.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![Walkthrough](https://i.imgur.com/Mr2Zwhy.gifv)
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with https://www.freeconvert.com
