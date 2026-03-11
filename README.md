@@ -35,7 +35,7 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-![Walkthrough](https://i.imgur.com/Mr2Zwhy.gifv)
+![Walkthrough](https://github.com/SwellEquation/CarnivorousPlantFlashcards/blob/main/WalkthroughGif.gif)
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with https://www.freeconvert.com
