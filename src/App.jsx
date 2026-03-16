@@ -14,12 +14,12 @@ const cards = [
   },
   {
     question: "What do temperate carnivorous plants such as American Pitchers and Flytraps do during the winter months?",
-    answer: "They go into Winter dormancy",
+    answer: "Dormancy",
     color: "#F7E27D"
   },
   {
     question: "What is the purpose of the lid that is on American pitcher plants and Nepenthes pitchers?",
-    answer: "To keep rainwater out",
+    answer: "Block rainwater",
     color: "#F5B7B1"
   },
   {
@@ -29,27 +29,27 @@ const cards = [
   },
   {
     question: "Do Nepenthes pitchers produce their own carnivorous fluid?",
-    answer: "Yes, each pitcher on a healthy plant is 1/4 filled with fluid",
+    answer: "Yes",
     color: "#BDE5A8"
   },
   {
     question: "Why did plants evolve to be carnivorous?",
-    answer: "To make up for the lack of nutrients in their soil",
+    answer: "No nutrients in soil",
     color: "#F5B7B1"
   },
   {
     question: "Where does a Flytrap store all of its energy?",
-    answer: "The rhizome",
+    answer: "Rhizome",
     color: "#F7E27D"
   },
   {
     question: "Do all carnivorous pitcher plants produce their own fluid?",
-    answer: "No, some species such as the Sarracenia Purpurea or Heliamphora get almost all of their fluid from rainfall",
+    answer: "No",
     color: "#F7E27D"
   },
   {
     question: "What carnivorous plant ancestor did the Venus Flytrap evolve from?",
-    answer: "The sundew",
+    answer: "Sundews",
     color: "#F5B7B1"
   }
 ]
@@ -72,32 +72,83 @@ function Flashcard({ card, flipped, onClick, index, total }) {
   )
 }
 
+function GuessInput({ guess, setGuess, handleSubmit, feedback }) {
+  return (
+    <div className="guess-container">
+
+      <input
+        type="text"
+        placeholder="Enter your guess..."
+        value={guess}
+        onChange={(e) => setGuess(e.target.value)}
+        className="guess-input"
+      />
+
+      <button onClick={handleSubmit} className="submit-btn">
+        Submit
+      </button>
+
+      {feedback && (
+        <p className={feedback === "correct" ? "correct" : "incorrect"}>
+          {feedback === "correct" ? "Correct!" : "Incorrect"}
+        </p>
+      )}
+
+    </div>
+  )
+}
+
 function App() {
 
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
 
+  const [guess, setGuess] = useState("")
+  const [feedback, setFeedback] = useState("")
+
   const nextCard = () => {
-    setIndex((index + 1) % cards.length)
-    setFlipped(false)
+    if (index < cards.length - 1) {
+      setIndex(index + 1)
+      setFlipped(false)
+      setGuess("")
+      setFeedback("")
+    }
   }
 
   const prevCard = () => {
-    setIndex((index - 1 + cards.length) % cards.length)
-    setFlipped(false)
+    if (index > 0) {
+      setIndex(index - 1)
+      setFlipped(false)
+      setGuess("")
+      setFeedback("")
+    }
   }
 
   const flipCard = () => {
     setFlipped(!flipped)
   }
 
+  /* CHECK ANSWER */
+  const handleSubmit = () => {
+
+    if (guess.trim().toLowerCase() === cards[index].answer.toLowerCase()) {
+      setFeedback("correct")
+      setFlipped(true)
+    } else {
+      setFeedback("incorrect")
+    }
+
+  }
+
   return (
     <div className="app">
+
       <div className="title">
         <h1>Carnivorous Plant Supremacy!</h1>
         <h3>How much do you know about carnivorous plants? Test your knowledge here!</h3>
         <p>Number of cards: {cards.length}</p>
       </div>
+
       <Flashcard
         card={cards[index]}
         flipped={flipped}
@@ -105,10 +156,34 @@ function App() {
         index={index}
         total={cards.length}
       />
+
+      <GuessInput
+        guess={guess}
+        setGuess={setGuess}
+        handleSubmit={handleSubmit}
+        feedback={feedback}
+      />
+
       <div className="arrow-container">
-        <button className="arrow" onClick={prevCard}>←</button>
-        <button className="arrow" onClick={nextCard}>→</button>
+
+        <button
+          className="arrow"
+          onClick={prevCard}
+          disabled={index === 0}
+        >
+          ←
+        </button>
+
+        <button
+          className="arrow"
+          onClick={nextCard}
+          disabled={index === cards.length - 1}
+        >
+          →
+        </button>
+
       </div>
+
     </div>
   )
 }

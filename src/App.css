@@ -60,6 +60,7 @@
   background-color: white;
   color: black;
   cursor: pointer;
+  margin-top: 30px;
 }
 
 .body {
@@ -84,4 +85,41 @@ h3 {
 
 p {
   font-size: 35px;
+}
+
+.guess-container {
+  margin-top: 20px;
+}
+
+.guess-input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  margin-right: 10px;
+}
+
+.submit-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.correct {
+  color: limegreen;
+  font-weight: bold;
+}
+
+.incorrect {
+  color: red;
+  font-weight: bold;
+}
+
+/* Disabled arrow visual feedback */
+.arrow:disabled {
+  background-color: grey;
+  color: darkgray;
+  cursor: not-allowed;
 }
